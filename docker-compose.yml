@@ -1,0 +1,16 @@
+version: '2.0'
+
+services:
+  nginx:
+    image: jinx
+    ports:
+      - 443:443
+    restart: always
+    depends_on:
+      - service
+
+  service:
+    image: service
+    ports:
+      - 8080:8080
+
