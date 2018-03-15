@@ -13,21 +13,57 @@ import org.springframework.context.annotation.Configuration;
 @SpringBootApplication
 public class Http2TrialApplication {
 
-        @Configuration
-        protected static class UndertowHttp2Configuration
-        {
+//    /**
+//     * Tomcat HTTP/2
+//     */
+//    @Bean
+//    public EmbeddedServletContainerCustomizer tomcatCustomizer() {
+//        return (container) -> {
+//            if (container instanceof TomcatEmbeddedServletContainerFactory) {
+//                ((TomcatEmbeddedServletContainerFactory) container)
+//                        .addConnectorCustomizers((connector) -> {
+//                            connector.addUpgradeProtocol(new Http2Protocol());
+//                        });
+//            }
+//        };
+//    }
 
-            @Bean
-            public UndertowEmbeddedServletContainerFactory embeddedServletContainerFactory()
-            {
-                UndertowEmbeddedServletContainerFactory factory = new UndertowEmbeddedServletContainerFactory();
-                factory.addBuilderCustomizers(builder -> builder.setServerOption(UndertowOptions.ENABLE_HTTP2, true));
-                return factory;
-            }
+    /**
+     * Undertow HTTP/2
+     */
+    @Configuration
+    protected static class UndertowHttp2Configuration {
 
+        @Bean
+        public UndertowEmbeddedServletContainerFactory embeddedServletContainerFactory() {
+            UndertowEmbeddedServletContainerFactory factory = new UndertowEmbeddedServletContainerFactory();
+            factory.addBuilderCustomizers(builder -> builder.setServerOption(UndertowOptions.ENABLE_HTTP2, true));
+            return factory;
         }
 
-        public static void main(String[] args) {
-            SpringApplication.run(Http2TrialApplication.class, args);
-        }
     }
+
+//    /**
+//     * Jetty HTTP/2
+//     */
+//    @Bean
+//    public EmbeddedServletContainerCustomizer customizer() {
+//        return container -> {
+//            if (container instanceof JettyEmbeddedServletContainerFactory) {
+//                ((JettyEmbeddedServletContainerFactory) container)
+//                        .addServerCustomizers(server -> {
+//                                    ServerConnector sc = (ServerConnector) server
+//                                            .getConnectors()[0];
+//                                    sc.addConnectionFactory(
+//                                            new HTTP2CServerConnectionFactory(new HttpConfiguration())
+//                                    );
+//                                }
+//                        );
+//            }
+//        };
+//    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(Http2TrialApplication.class, args);
+    }
+}

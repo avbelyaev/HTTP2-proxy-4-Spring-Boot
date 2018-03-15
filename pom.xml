@@ -28,16 +28,29 @@
             </exclusions>
         </dependency>
 
+
+        <!-- Undertow. Exclude sprig-boot-starter-tomcat in starter-web dependency and uncomment this -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
 
+
+        <!-- Jetty. Exclude sprig-boot-starter-tomcat in starter-web dependency and uncomment this-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-jetty</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.eclipse.jetty.http2</groupId>-->
+            <!--<artifactId>http2-server</artifactId>-->
+            <!--<version>9.4.8.v20171121</version>-->
+        <!--</dependency>-->
+
     </dependencies>
 
     <build>
         <finalName>boot</finalName>
-
         <plugins>
 
             <plugin>
@@ -61,6 +74,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 

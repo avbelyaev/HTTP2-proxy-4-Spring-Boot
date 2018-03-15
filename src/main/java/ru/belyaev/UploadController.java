@@ -22,22 +22,22 @@ public class UploadController {
     @PostMapping()
     public @ResponseBody
     String handleFileUpload(@RequestParam("name") String name,
-                            @RequestParam("file") MultipartFile file){
+                            @RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
-                BufferedOutputStream stream =
-                        new BufferedOutputStream(new FileOutputStream(new File(name)));
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(name)));
                 stream.write(bytes);
                 stream.close();
-                return "You successfully uploaded " + name + "!";
+
+                return "You have successfully uploaded " + name + "!";
 
             } catch (Exception e) {
-                return "You failed to upload " + name + " => " + e.getMessage();
+                return "You have failed to upload " + name + " => " + e.getMessage();
             }
 
         } else {
-            return "You failed to upload " + name + " because the file was empty.";
+            return "You have failed to upload " + name + " because the file was empty.";
         }
     }
 }
