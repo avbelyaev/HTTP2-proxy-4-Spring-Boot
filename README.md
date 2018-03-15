@@ -1,6 +1,12 @@
 
 # HTTP/2 performance comparison of embedded servers (Tomcat, Jetty, Undertow) running SpringBoot
 
+## Quick start:
+
+- Build Nginx image: `cd nginx && docker build -t jinx .`
+- Build Spring Boot service image: `docker build -t service .`
+- Run build: `docker-compose up`
+
 
 ## Undertow behind Nginx
 ### GET, Nginx(with SSL) proxy
