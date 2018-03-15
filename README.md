@@ -2,15 +2,12 @@
 # HTTP/2 performance comparison of embedded servers (Tomcat, Jetty, Undertow) running SpringBoot
 
 
-## Undertow
+## Undertow behind Nginx
 ### GET, Nginx(with SSL) proxy
 
 #### Request:
 ```bash
-curl --http2-prior-knowledge 
-    -w "@curl-format.txt" 
-    https://localhost/upload 
-    --insecure -v
+curl --http2-prior-knowledge -w "@curl-format.txt" https://localhost/upload --insecure -v
 ```
 
 #### Response:
@@ -73,16 +70,13 @@ Hello Spring!    time_namelookup:  0,004255
          time_total:  0,078723
 ```
 
+---
 
 ### POST, 50mb multipart data, Nginx(SSL) proxy
 
 #### Request:
 ```bash
-curl --http2-prior-knowledge 
-    -F "name=duck" -F "file=@duck" 
-    https://localhost/upload 
-    --insecure -v 
-    -w "@curl-format.txt"
+curl --http2-prior-knowledge -F "name=duck" -F "file=@duck" -w "@curl-format.txt" https://localhost/upload --insecure -v 
 ```
 
 #### Response:
