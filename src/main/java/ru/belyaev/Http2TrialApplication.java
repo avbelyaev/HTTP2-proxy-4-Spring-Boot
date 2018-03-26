@@ -34,10 +34,15 @@ public class Http2TrialApplication {
     @Configuration
     protected static class UndertowHttp2Configuration {
 
+        private static final int INITIAL_WINDOW_SIZE_BYTES = 1024 * 1024; // 1 MiB
+
         @Bean
         public UndertowEmbeddedServletContainerFactory embeddedServletContainerFactory() {
             UndertowEmbeddedServletContainerFactory factory = new UndertowEmbeddedServletContainerFactory();
-            factory.addBuilderCustomizers(builder -> builder.setServerOption(UndertowOptions.ENABLE_HTTP2, true));
+            factory.addBuilderCustomizers(builder -> {
+                builder.setServerOption(UndertowOptions.ENABLE_HTTP2, true);
+                builder.setServerOption(UndertowOptions.HTTP2_SETTINGS_INITIAL_WINDOW_SIZE, INITIAL_WINDOW_SIZE_BYTES);
+            });
             return factory;
         }
 

@@ -25,10 +25,8 @@ public class UploadController {
                             @RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
             try {
-                byte[] bytes = file.getBytes();
-                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(name)));
-                stream.write(bytes);
-                stream.close();
+                File outputFile = new File(name);
+                file.transferTo(outputFile);
 
                 return "You have successfully uploaded " + name + "!";
 
