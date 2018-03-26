@@ -18,19 +18,19 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Traefik can listen to the Docker events
 
-#  gateway:
-#    image: gateway
-#    ports:
-#      - 443:9000
-#    labels:
-#      - "traefik.frontend.rule=Headers: RedirectMe, yes"  # should redirect rq to traefik to this gateway app
-#    depends_on:
-#      - service
+  gateway:
+    image: gateway
+    ports:
+      - 9000:9000
+    labels:
+      - "traefik.frontend.rule=Host:gateway.local"  # should redirect rq based on header
+    depends_on:
+      - service
 
   service:
     image: service
     labels:
-      - "traefik.frontend.rule=Headers: RedirectMe, yes"  # should redirect rq to traefik to this gateway app
+      - "traefik.frontend.rule=Host:service.local"  # should redirect rq based on header
     ports:
       - 8080:8080
 
