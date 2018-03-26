@@ -6,6 +6,7 @@ spring:
 
 
 server:
+  port: 9000
   ssl:
     key-store: classpath:keystore.jks
     key-store-password: undertow
@@ -19,5 +20,10 @@ server:
     direct-buffers: true
     io-threads: 4
     worker-threads: 32
-# Jetty logs
-#  jetty.accesslog.enabled: true
+
+zuul:
+  routes:
+    uploader: # spring.application.name value of service
+      url: https://localhost:8080
+
+ribbon.eureka.enabled: false
