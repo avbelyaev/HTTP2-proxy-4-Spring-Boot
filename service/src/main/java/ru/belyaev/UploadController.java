@@ -1,5 +1,7 @@
 package ru.belyaev;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,8 +16,11 @@ import java.io.FileOutputStream;
 @RequestMapping("/upload")
 public class UploadController {
 
+    private static Logger log = LoggerFactory.getLogger(UploadController.class);
+
     @GetMapping()
     String home() {
+        log.info("Request to hello spring has been received");
         return "Hello Spring!";
     }
 
@@ -23,6 +28,7 @@ public class UploadController {
     public @ResponseBody
     String handleFileUpload(@RequestParam("name") String name,
                             @RequestParam("file") MultipartFile file) {
+        log.info("Attempting to receive file " + file);
         if (!file.isEmpty()) {
             try {
                 File outputFile = new File(name);

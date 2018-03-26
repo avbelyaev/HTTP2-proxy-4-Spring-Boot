@@ -7,10 +7,10 @@ spring:
 
 server:
   port: 8080
-  ssl:
-    key-store: classpath:keystore.jks
-    key-store-password: undertow
-    key-password: undertow
+#  ssl:
+#    key-store: classpath:keystore.jks
+#    key-store-password: undertow
+#    key-password: undertow
   undertow:
     accesslog:
       enabled: true
