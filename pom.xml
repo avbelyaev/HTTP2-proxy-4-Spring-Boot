@@ -50,7 +50,7 @@
     </dependencies>
 
     <build>
-        <finalName>boot</finalName>
+        <finalName>uploader</finalName>
         <plugins>
 
             <plugin>

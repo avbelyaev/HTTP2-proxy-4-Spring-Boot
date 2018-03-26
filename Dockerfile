@@ -1,7 +1,7 @@
 FROM openjdk:8-jdk-alpine
 
-COPY ./target/boot.jar /app/boot.jar
+COPY ./target/boot.jar /app/uploader.jar
 
 WORKDIR /app
 
-ENTRYPOINT ["java", "-jar", "boot.jar"]
+ENTRYPOINT ["java", "-jar", "uploader.jar"]
