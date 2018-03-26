@@ -34,7 +34,7 @@ public class GatewayApplication {
             UndertowEmbeddedServletContainerFactory factory = new UndertowEmbeddedServletContainerFactory();
             factory.addBuilderCustomizers(builder -> {
                 builder.setServerOption(UndertowOptions.ENABLE_HTTP2, true);
-                builder.setServerOption(UndertowOptions.HTTP2_SETTINGS_INITIAL_WINDOW_SIZE, INITIAL_WINDOW_SIZE_BYTES);
+//                builder.setServerOption(UndertowOptions.HTTP2_SETTINGS_INITIAL_WINDOW_SIZE, INITIAL_WINDOW_SIZE_BYTES);
             });
             return factory;
         }
