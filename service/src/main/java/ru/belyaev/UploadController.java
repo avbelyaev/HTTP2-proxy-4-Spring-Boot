@@ -8,6 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * @author avbelyaev
@@ -27,13 +30,12 @@ public class UploadController {
     @PostMapping()
     public @ResponseBody
     String handleFileUpload(@RequestParam("name") String name,
-                            @RequestParam("file") MultipartFile file) {
-        log.info("Attempting to receive file " + file);
-        if (!file.isEmpty()) {
+                            @RequestParam("file") MultipartFile multipartFile) {
+        log.info("Attempting to receive file " + multipartFile.getOriginalFilename());
+        if (!multipartFile.isEmpty()) {
             try {
-                File outputFile = new File(name);
-                file.transferTo(outputFile);
-
+                Path path = Paths.get(name);
+                Files.write(path, multipartFile.getBytes());
                 return "You have successfully uploaded " + name + "!";
 
             } catch (Exception e) {
