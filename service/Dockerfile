@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-alpine
 
-COPY ./target/boot.jar /app/uploader.jar
+COPY ./target/uploader.jar /app/uploader.jar
 
 WORKDIR /app
 

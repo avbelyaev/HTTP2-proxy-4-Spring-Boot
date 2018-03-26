@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>spring-boot-embdedded-web-servers</groupId>
-    <artifactId>http2-spring-boot</artifactId>
+    <artifactId>uploader</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 

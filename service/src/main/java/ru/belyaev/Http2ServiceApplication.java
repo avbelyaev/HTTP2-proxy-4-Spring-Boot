@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @author avbelyaev
  */
 @SpringBootApplication
-public class Http2TrialApplication {
+public class Http2ServiceApplication {
 
 //    /**
 //     * Tomcat HTTP/2
@@ -69,6 +69,6 @@ public class Http2TrialApplication {
 //    }
 
     public static void main(String[] args) {
-        SpringApplication.run(Http2TrialApplication.class, args);
+        SpringApplication.run(Http2ServiceApplication.class, args);
     }
 }
