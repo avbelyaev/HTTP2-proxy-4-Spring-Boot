@@ -1,0 +1,62 @@
+################################################################
+# Global configuration
+################################################################
+
+logLevel = "INFO"
+
+# Traefik logs file
+traefikLogsFile = "/var/log/traefik.log"
+
+# Access logs file
+accessLogsFile = "/var/log/accessTraefik.log"
+
+
+[entryPoints]
+ [entryPoints.http]
+ address = ":80"
+   [entryPoints.http.redirect]
+     entryPoint = "https"
+ [entryPoints.https]
+ address = ":443"
+   [entryPoints.https.tls]
+       [[entryPoints.https.tls.certificates]]
+       CertFile = "/etc/traefik/cert.pem"
+       KeyFile = "/etc/traefik/key.pem"
+
+################################################################
+# Web configuration backend
+################################################################
+
+[web]
+address = ":8081"
+
+################################################################
+# Docker configuration backend
+################################################################
+
+[docker]
+
+endpoint = "unix:///var/run/docker.sock"
+
+#domain = "devbg.us"
+
+watch = true
+
+swarmmode = false
+
+################################################################
+# File configuration backend
+################################################################
+
+[file]
+  [backends]
+    [backends.gateway]
+      [backends.gateway]
+      url = "http://gateway:9000"
+
+[frontends]
+  [frontends.gateway]
+  backend = "gateway"
+  passHostHeader = true
+    [frontends.gateway.routes.entry]
+    rule = "Host:gateway.local"

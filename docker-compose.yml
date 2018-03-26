@@ -16,7 +16,7 @@ services:
       - "80:80"     #The HTTP port
       - "8081:8081" #The Web UI (enabled by --api)
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # Traefik can listen to the Docker events
+      - ./traefik:/etc/traefik
 
   gateway:
     image: gateway

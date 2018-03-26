@@ -12,11 +12,11 @@ curl https://localhost/uploader/upload --insecure -v
 # Zuul is behind it (gateway, no SSL, port 9000), configured with docker container label:
 # - "traefik.frontend.rule=Host:gateway.local"
 # and service is behind Zuul (service, no SSL, port 8080), send rq to Zuul (gateway) like this:
-curl -H Host:gateway.local http://localhost/uploader/upload -v --insecure
+curl -H Host:gateway.local http://localhost/uploader/upload -v
 # and it will go traefik -> zuul -> service
 
 
 # if zuul is configured with traefik rule (container label) like this:
 # - "traefik.frontend.rule=Header: RedirectMe, gateway"
 # requests to zuul should have header:
-curl -H RedirectMe:gateway http://localhost/uploader/upload -v --insecure
+curl -H RedirectMe:gateway http://localhost/uploader/upload -v
