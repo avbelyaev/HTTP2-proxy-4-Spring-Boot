@@ -24,6 +24,6 @@ server:
 zuul:
   routes:
     uploader: # spring.application.name value of service
-      url: http://localhost:8080
+      url: http://service:8080
 
 ribbon.eureka.enabled: false

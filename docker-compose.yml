@@ -1,11 +1,18 @@
 version: '2.0'
 
 services:
-  nginx:
-    image: jinx
+#  nginx:
+#    image: jinx
+#    ports:
+#      - 443:443
+#    restart: always
+#    depends_on:
+#      - service
+
+  gateway:
+    image: gateway
     ports:
       - 443:443
-    restart: always
     depends_on:
       - service
 
