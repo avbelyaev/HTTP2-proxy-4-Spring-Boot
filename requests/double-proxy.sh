@@ -15,8 +15,18 @@ curl https://localhost/uploader/upload --insecure -v
 curl -H Host:gateway.local http://localhost/uploader/upload -v
 # and it will go traefik -> zuul -> service
 
+# with HTTP/2 GET:
+curl --http2-prior-knowledge -H Host:gateway.local https://localhost/uploader/upload --insecure -v
+# with HTTP/2 POST:
+curl --http2-prior-knowledge -F "name=duck" -F "file=@duck50" -H Host:gateway.local https://172.24.32.58/uploader/upload -v --insecure
+
 
 # if zuul is configured with traefik rule (container label) like this:
 # - "traefik.frontend.rule=Header: RedirectMe, gateway"
 # requests to zuul should have header:
 curl -H RedirectMe:gateway http://localhost/uploader/upload -v
+
+
+
+# SSE events can be gained from endpoint "/sse/mono" or "/sse/flux"
+curl --http2-prior-knowledge -H Host:gateway.local https://localhost/uploader/sse/flux --insecure -v
