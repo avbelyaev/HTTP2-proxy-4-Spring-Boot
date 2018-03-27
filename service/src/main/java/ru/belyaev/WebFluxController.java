@@ -1,5 +1,6 @@
 package ru.belyaev;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,12 +18,16 @@ import java.util.concurrent.ThreadLocalRandom;
 @RequestMapping("/sse")
 class WebFluxController {
 
-    @GetMapping("/mono")
+    @GetMapping(
+            value = "/mono",
+            produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Mono<String> mono() {
         return Mono.just("Hello WebFlux!");
     }
 
-    @GetMapping("/flux")
+    @GetMapping(
+            value = "/flux",
+            produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<String> randomStrings() {
         return Flux.interval(Duration.ofSeconds(2))
                 .map(Long::intValue)
