@@ -4,59 +4,73 @@
 
 logLevel = "INFO"
 
-# Traefik logs file
-traefikLogsFile = "/var/log/traefik.log"
-
-# Access logs file
-accessLogsFile = "/var/log/accessTraefik.log"
-
+defaultEntryPoints = ["http"]
 
 [entryPoints]
  [entryPoints.http]
  address = ":80"
-   [entryPoints.http.redirect]
-     entryPoint = "https"
- [entryPoints.https]
- address = ":443"
-   [entryPoints.https.tls]
-       [[entryPoints.https.tls.certificates]]
-       CertFile = "/etc/traefik/cert.pem"
-       KeyFile = "/etc/traefik/key.pem"
+#   [entryPoints.http.redirect]
+#       entryPoint = "https"
+# [entryPoints.https]
+# address = ":443"
+#   [entryPoints.https.tls]
+#       [[entryPoints.https.tls.certificates]]
+#           CertFile = "/var/traefik/cert.crt"
+#           KeyFile = "/var/traefik/cert.key"
 
 ################################################################
 # Web configuration backend
 ################################################################
 
-[web]
+[api]
 address = ":8081"
 
 ################################################################
 # Docker configuration backend
 ################################################################
-
-[docker]
-
-endpoint = "unix:///var/run/docker.sock"
-
-#domain = "devbg.us"
-
-watch = true
-
-swarmmode = false
+#
+#[docker]
+#
+#endpoint = "unix:///var/run/docker.sock"
+# no fckin idea how this works so configured connection to docker via docker-compose
+#
+##domain = "mydomain.com"
+#
+#watch = true
+#swarmmode = false
 
 ################################################################
 # File configuration backend
 ################################################################
 
 [file]
-  [backends]
+
+[backends]
     [backends.gateway]
-      [backends.gateway]
-      url = "http://gateway:9000"
+        [backends.gateway.servers.server1]
+        url = "http://gateway:9000"
+    [backends.service]
+        [backends.service.servers.server1]
+        url = "http://service:8080"
+    [backends.google]
+        [backends.google.servers.server1]
+            url = "http://google.com"
 
 [frontends]
   [frontends.gateway]
-  backend = "gateway"
-  passHostHeader = true
-    [frontends.gateway.routes.entry]
-    rule = "Host:gateway.local"
+    backend = "gateway"
+    passHostHeader = true
+    [frontends.gateway.routes.host]
+        rule = "Host:gateway.local"
+
+  [frontends.service]
+    backend = "service"
+    passHostHeader = true
+        [frontends.service.routes.host]
+            rule = "Host:service.local"
+
+  [frontends.google]
+    backend = "google"
+    passHostHeader = true
+        [frontends.google.routes.host]
+            rule = "Host:google.local"

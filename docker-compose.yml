@@ -11,26 +11,31 @@ services:
 
   proxy:
     image: traefik
-    command: --api --docker
+    command: --configFile=/var/traefik/traefik.toml
     ports:
-      - "80:80"     #The HTTP port
+      - "80:80"
       - "8081:8081" #The Web UI (enabled by --api)
+      - "443:443"
     volumes:
-      - ./traefik:/etc/traefik
+      - ./traefik/traefik.toml:/var/traefik/traefik.toml
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - gateway
+      - service
 
   gateway:
     image: gateway
     ports:
       - 9000:9000
-    labels:
-      - "traefik.frontend.rule=Host:gateway.local"  # should redirect rq based on header
+#    labels:
+#      - "traefik.frontend.rule=Host:gateway.local"  # should redirect rq based on header
     depends_on:
       - service
 
   service:
     image: service
-    labels:
-      - "traefik.frontend.rule=Host:service.local"  # should redirect rq based on header
+#    labels:
+#      - "traefik.frontend.rule=Host:service.local"  # should redirect rq based on header
     ports:
       - 8080:8080
 
