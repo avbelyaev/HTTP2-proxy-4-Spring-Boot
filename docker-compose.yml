@@ -14,10 +14,10 @@ services:
     command: --configFile=/var/traefik/traefik.toml
     ports:
       - "80:80"
-      - "8081:8081" #The Web UI (enabled by --api)
       - "443:443"
+      - "8081:8081" # traefik UI
     volumes:
-      - ./traefik/traefik.toml:/var/traefik/traefik.toml
+      - ./traefik:/var/traefik
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - gateway
@@ -27,15 +27,11 @@ services:
     image: gateway
     ports:
       - 9000:9000
-#    labels:
-#      - "traefik.frontend.rule=Host:gateway.local"  # should redirect rq based on header
     depends_on:
       - service
 
   service:
     image: service
-#    labels:
-#      - "traefik.frontend.rule=Host:service.local"  # should redirect rq based on header
     ports:
       - 8080:8080
 
