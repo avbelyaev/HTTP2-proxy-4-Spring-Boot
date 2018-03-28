@@ -1,4 +1,4 @@
-# Reverse-proxy
+# Reverse-proxy (SSL terminator)
 ## Nginx
 
 Proxies requests to service and can be use as Zuul replacement
@@ -8,7 +8,7 @@ Proxies requests to service and can be use as Zuul replacement
 - get Jinxed! :)
 
 
-### Requests:
+### Requests
 
 Let Nginx be launched on 80, 443 ports. Let service be launched behind it
 
