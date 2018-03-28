@@ -23,6 +23,7 @@ To switch back to Undertow, do same as for Jetty
 
 ### Quick start:
 
+- Build jar: `mvn clean install`
 - Build service image: `docker build -t service .`
 - To enable SSL, uncomment `server.ssl` section in `application.yml`
 

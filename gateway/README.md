@@ -7,6 +7,7 @@ Gateway redirects all requests at endpoint `host:port/uploader` to `uploader` se
 
 ### Quick start:
 
+- Build jar: `mvn clean install`
 - Build gateway image: `docker build -t gateway .`
 - To enable SSL, uncomment `server.ssl` section in `application.yml`
 
