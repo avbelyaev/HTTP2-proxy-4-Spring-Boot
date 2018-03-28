@@ -29,6 +29,7 @@ To switch back to Undertow, do same as for Jetty
 
 ### Requests:
 
+```
 HTTP/2:
 curl --http2-prior-knowledge http://localhost:8080/upload -v
 curl --http2-prior-knowledge -F "name=duck" -F "file=@duck" http://localhost:8080/upload -v

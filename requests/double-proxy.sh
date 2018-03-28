@@ -28,5 +28,6 @@ curl -H RedirectMe:gateway http://localhost/uploader/upload -v
 
 
 
-# SSE events can be gained from endpoint "/sse/mono" or "/sse/flux"
-curl --http2-prior-knowledge -H Host:gateway.local https://localhost/uploader/sse/flux --insecure -v
+# SSE events can be gained from endpoint "/sse/mono" or "/sse/flux" through Traefik bypassing Zuul (Traefik -> service)
+curl --http2-prior-knowledge -H Host:service.local https://localhost/sse/flux --insecure -v
+# Zuul cannot deal with long-living connections (sockets, SSE) (see https://github.com/Netflix/zuul/issues/376)
