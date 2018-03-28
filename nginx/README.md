@@ -23,3 +23,4 @@ curl --http2-prior-knowledge https://localhost/sse/flux --insecure -v
 
 ### Notes
 - Unlike Zuul, Nginx supports HTTP/2 only with SSL enabled
+- Consider which protocol is used in upstream and use it in `proxy_pass`
