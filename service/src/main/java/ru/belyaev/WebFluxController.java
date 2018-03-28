@@ -1,5 +1,7 @@
 package ru.belyaev;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +20,13 @@ import java.util.concurrent.ThreadLocalRandom;
 @RequestMapping("/sse")
 class WebFluxController {
 
+    private static Logger log = LoggerFactory.getLogger(UploadController.class);
+
     @GetMapping(
             value = "/mono",
             produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Mono<String> mono() {
+        log.info("Hello Webflux (mono) request!");
         return Mono.just("Hello WebFlux!");
     }
 
@@ -29,6 +34,7 @@ class WebFluxController {
             value = "/flux",
             produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<String> randomStrings() {
+        log.info("Webflux Flux request!");
         return Flux.interval(Duration.ofSeconds(2))
                 .map(Long::intValue)
                 .map(WebFluxController::generateRandomNumbericString);
