@@ -46,6 +46,7 @@ public class DummyFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
 
+        ctx.addZuulRequestHeader("X-Org", "42");
         log.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
 
         return null;
