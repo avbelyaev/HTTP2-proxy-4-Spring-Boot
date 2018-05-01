@@ -2,9 +2,9 @@
 ## Spring Boot
 
 Service supports requests to endpoints:
-- `host:port/upload`, GET, POST Multipart
-- Server-Sent Events (SSE) via WebFlux Mono at `host:port/sse/mono`, GET
-- SSE via WebFlux Flux at `host:port/sse/flux`, GET
+- `/upload`, GET, POST Multipart
+- Server-Sent Events (SSE) via WebFlux Mono at `/sse/mono`, GET
+- SSE via WebFlux Flux at `/sse/flux`, GET
 
 Undertow is enabled at the moment.
 
@@ -45,7 +45,7 @@ curl http://localhost:8080/sse/mono -v
 curl http://localhost:8080/sse/flux -v
 ```
 
-If SSL is enabled, requests look like this:
+If SSL is enabled, requests look like this (`https://...`, `-insecure`):
 ```
 HTTP/2:
 curl --http2-prior-knowledge https://localhost:8080/upload --insecure -v
