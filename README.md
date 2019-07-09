@@ -6,6 +6,12 @@ Testing how proxies
 - Nginx
 - Zuul
 
-work with Spring Boot (and with Server Side Events)
+work with Spring Boot deployed on servers
+
+- Tomcat
+- Jetty
+- Undertow
+
+Also checking how Server Side events work in such configs. `Spoiler: they do not work with Zuul proxy`
 
 For more notes see corresponding repositories. cURL requests reside in `requests` dir.
